@@ -12,6 +12,7 @@
                 Console.WriteLine("1: Quersumme berechnen");
                 Console.WriteLine("2: Zeichen ersetzen");
                 Console.WriteLine("3: Vokale entfernen");
+                Console.WriteLine("4: Passwortstärke prüfen");
 
                 Console.Write("Auswahl:");
                 auswahl=Console.ReadLine();
@@ -45,7 +46,43 @@
                         Console.WriteLine("Vokale aus der Eingabe entfernen:");
                         Console.Write("Eingabe:");
                         string eingabe = Console.ReadLine();
+                        List<string> Vokalliste = new List<string>
+                        {
+                            "a", "i", "e", "o", "u", "ü", "ö", "ä"
+                        };
+                        foreach (string ch in Vokalliste)
+                        {
+                            eingabe = ZeichenErsetzen(eingabe.ToLower(), ch, "");                            
+                        }
+                        Console.WriteLine("Text ohne Vokale:");
+                        Console.WriteLine(eingabe);
+                        break;
+                    case "4":
+                        bool schlechtesPasswort = true;
+                        do
+                        {
 
+                            Console.WriteLine(@"Das Passwort soll mindestens acht zeichen lang
+                                            sein, Groß- und Kleinbuchstaben, sowie Zahlen
+                                            und Sonderzeichen enthalten.");
+                            Console.Write("Testpasswort:");
+                            string passwort = Console.ReadLine();
+
+                            if (passwort.Length < 8)
+                            {
+                                Console.WriteLine("Das Passwort ist zu kurz!");
+                            }
+                            else if (!EnthältKleinbuchstaben(passwort))
+                            {
+                                Console.WriteLine("Das Passwort enthält keine Kleinbuchstaben!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Gutes Passwort!");
+                                schlechtesPasswort = false;
+                            }
+
+                        } while (schlechtesPasswort);
                         break;
                     default:
                         Console.WriteLine("Ungültige Eingabe!");
@@ -83,6 +120,46 @@
                 }
             }
             return ausgabe;
+        }
+
+        static bool EnthältKleinbuchstaben(string text)
+        {
+            bool Bedingung=false;
+            foreach(char ch in text)
+            {
+                if (Char.IsLower(ch)) {Bedingung = true;}
+            }
+            return Bedingung;
+        }
+
+        static bool EnthältGrossbuchstaben(string text)
+        {
+            bool Bedingung = false;
+            foreach (char ch in text)
+            {
+                if (Char.IsUpper(ch)) { Bedingung = true; }
+            }
+            return Bedingung;
+        }
+
+        static bool EnthältZahlen(string text)
+        {
+            bool Bedingung = false;
+            foreach (char ch in text)
+            {
+                if (Char.IsDigit(ch)) { Bedingung = true; }
+            }
+            return Bedingung;
+        }
+
+        static bool EnthältSonderzeichen(string text)
+        {
+            bool Bedingung = false;
+            foreach (char ch in text)
+            {
+                if (!Char.IsLetterOrDigit(ch)) { Bedingung = true; }
+            }
+            return Bedingung;
         }
     }
 }
