@@ -62,9 +62,9 @@
                         do
                         {
 
-                            Console.WriteLine(@"Das Passwort soll mindestens acht zeichen lang
-                                            sein, Groß- und Kleinbuchstaben, sowie Zahlen
-                                            und Sonderzeichen enthalten.");
+                            Console.WriteLine("Das Passwort soll mindestens acht zeichen lang "
+                                             +"sein, Groß- und \nKleinbuchstaben, sowie Zahlen"
+                                             +"und Sonderzeichen enthalten.");
                             Console.Write("Testpasswort:");
                             string passwort = Console.ReadLine();
 
@@ -75,6 +75,18 @@
                             else if (!EnthältKleinbuchstaben(passwort))
                             {
                                 Console.WriteLine("Das Passwort enthält keine Kleinbuchstaben!");
+                            }
+                            else if (!EnthältGrossbuchstaben(passwort))
+                            {
+                                Console.WriteLine("Das Passwort enthält keine Großbuchstaben!");
+                            }
+                            else if (!EnthältZahlen(passwort))
+                            {
+                                Console.WriteLine("Das Passwort enthält keine Zahlen!");
+                            }
+                            else if (!EnthältSonderzeichen(passwort))
+                            {
+                                Console.WriteLine("Das Passwort enthält keine Sonderzeichen!");
                             }
                             else
                             {
